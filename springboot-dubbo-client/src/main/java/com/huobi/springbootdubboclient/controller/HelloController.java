@@ -12,7 +12,6 @@ package com.huobi.springbootdubboclient.controller;
 
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.huobi.springbootdubboapi.service.HelloService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -29,9 +28,9 @@ public class HelloController {
 
 
     //注入服务提供方暴露的接口，通过@Reference注解，dubbo会在扫描的时候自动代理接口，然后通过rpc调用远程服务。
-    //如果用xml配置方式，需要将@Reference换成@Autowired。
-//    @Reference
-    @Autowired
+    @Reference(version = "${demo.service.version}",
+    application = "${dubbo.application.id}",
+    url = "dubbo://localhost:20880")
     private HelloService helloService;
 
     @GetMapping("/say")

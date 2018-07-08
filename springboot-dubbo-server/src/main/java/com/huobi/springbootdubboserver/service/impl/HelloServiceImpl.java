@@ -21,7 +21,11 @@ import com.huobi.springbootdubboapi.service.HelloService;
  * @create 2018/4/1
  * @since 1.0.0
  */
-@Service //该Service注解是dubbo的注解，不是spring的。若使用xml配置方式暴露接口，则不需要该注解。
+@Service(version = "${demo.service.version}",
+        application = "${dubbo.application.id}",
+        protocol = "${dubbo.protocol.id}",
+        registry = "${dubbo.registry.id}"
+) //该Service注解是dubbo的注解，不是spring的。若使用xml配置方式暴露接口，则不需要该注解。
 public class HelloServiceImpl implements HelloService {
 
     @Override
